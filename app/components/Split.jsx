@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Pane from './Pane';
+import styles from './Split.module.css';
 
 export default React.createClass({
     propTypes : {
@@ -16,7 +17,6 @@ export default React.createClass({
     },
     pane(pane){
         let type = pane.type
-        console.log(pane)
         pane.path = (type == 'root') ? type : pane.path + '.' + type 
         if(pane.split == 'NONE' || !pane.split){
             return (
@@ -29,7 +29,7 @@ export default React.createClass({
     split(pane) {
         let [firstType, secondType] = this.splitType(pane.split)
         return (
-            <div className={`split ${pane.split}`}>
+            <div className={`${pane.type} split ${pane.split}`}>
                 {this.pane({
                     type: firstType, path: pane.path, ...pane[firstType]
                 })}
