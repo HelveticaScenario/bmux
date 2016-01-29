@@ -10,7 +10,6 @@ export default React.createClass({
     },
     render() {
         let {className, splitPane, path, ...props} = this.props
-        console.log(path)
         return (
             <div className={className}>
                 <div className="menu">

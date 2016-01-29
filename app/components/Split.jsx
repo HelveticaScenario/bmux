@@ -26,15 +26,15 @@ export default React.createClass({
             return this.split(pane)
         }
     },
-    split() {
-        let [firstType, secondType] = this.splitType(this.props.split)
+    split(pane) {
+        let [firstType, secondType] = this.splitType(pane.split)
         return (
-            <div className={`split ${this.props.split}`}>
+            <div className={`split ${pane.split}`}>
                 {this.pane({
-                    type: firstType, ...this.props[firstType]
+                    type: firstType, path: pane.path, ...pane[firstType]
                 })}
                 {this.pane({
-                    type: secondType, ...this.props[secondType]
+                    type: secondType, path: pane.path, ...pane[secondType]
                 })}
             </div>
         );

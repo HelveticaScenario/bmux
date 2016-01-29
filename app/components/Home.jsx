@@ -46,8 +46,7 @@ export default React.createClass({
                 bottom: {split: 'NONE', src: 'NONE'}
             }
         }
-        console.log(path, splitDirection, assign(this.state, path, splits[splitDirection]))
-        this.setState(Object.assign({root: this.state.root}, assign(this.state, path, splits[splitDirection])))
+        this.setState({root: Object.assign(this.state.root, assign(this.state, path, splits[splitDirection]).root)})
     },
     render() {
         return (
