@@ -20,7 +20,7 @@ export default React.createClass({
         pane.path = (type == 'root') ? type : pane.path + '.' + type 
         if(pane.split == 'NONE' || !pane.split){
             return (
-                <Pane key={type} className={type} {...pane} splitPane={this.props.splitPane}/>
+                <Pane key={type} className={type} {...pane} splitPane={this.props.splitPane} setPane={this.props.setPane}/>
             )
         } else {
             return this.split(pane)
@@ -40,7 +40,7 @@ export default React.createClass({
         );
     },
     render(){
-        let {splitPane, ...props} = this.props
+        let {splitPane, setPane, ...props} = this.props
         return this.pane(props)
     }
 });

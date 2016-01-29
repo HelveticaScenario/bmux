@@ -77,6 +77,21 @@ a:hover {
 .pane .menu {
     height: 15px
 }
+.pane .menu input {
+    width: calc( 100% - 30px );
+    height: 100%;
+    display: block;
+    float: left;
+}
+.pane .menu button {
+    float: right;
+    border-radius: 0;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    background: white;
+    border: 1px solid gray;
+}
 .pane webview {
     display: inline-block;
     width: 100%;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import objectPath from 'object-path-immutable';
 import styles from './Home.module.css';
 import Split from './Split';
 
@@ -48,10 +49,13 @@ export default React.createClass({
         }
         this.setState({root: Object.assign(this.state.root, assign(this.state, path, splits[splitDirection]).root)})
     },
+    setPane(path, state){
+        this.setState(assign(this.state, path, state))
+    },
     render() {
         return (
             <div className={styles.container}>
-                <Split splitPane={this.splitPane} {...this.state.root} />
+                <Split setPane={this.setPane} splitPane={this.splitPane} {...this.state.root} />
             </div>
         );
     }
