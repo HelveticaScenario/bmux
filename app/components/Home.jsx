@@ -3,25 +3,7 @@ import { Link } from 'react-router';
 import objectPath from 'object-path-immutable';
 import styles from './Home.module.css';
 import Split from './Split';
-
-function assign(obj, prop, value) {
-    if (typeof prop === "string")
-        prop = prop.split(".");
-
-    if (prop.length > 1) {
-        var e = prop.shift();
-        assign(obj[e] =
-                 Object.prototype.toString.call(obj[e]) === "[object Object]"
-                 ? obj[e]
-                 : {},
-               prop,
-               value);
-    } else {
-        obj[prop[0]] = value;
-    }
-
-    return obj
-}
+import _ from 'lodash';
 
 export default React.createClass({
     getInitialState() {
@@ -47,7 +29,8 @@ export default React.createClass({
                 bottom: {split: 'NONE', src: 'NONE'}
             }
         }
-        this.setState({root: Object.assign(this.state.root, assign(this.state, path, splits[splitDirection]).root)})
+
+        // this.setState({root: Object.assign(this.state.root, assign(this.state, path, splits[splitDirection]).root)})
     },
     setPane(path, state){
         this.setState(assign(this.state, path, state))

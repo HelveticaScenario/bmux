@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+import monitor from './monitor.js';
 
 const rootReducer = combineReducers({
-  counter
+  monitor
 });
 
 export default rootReducer;
