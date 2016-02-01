@@ -5,6 +5,16 @@ import Split from './Split';
 import _ from 'lodash';
 
 export default React.createClass({
+    getInitialState() {
+        return {
+            root: {
+                split: 'NONE',
+                path: 'root',
+                type: 'root',
+                src: 'NONE'
+            }
+        }
+    },
     splitPane(path, splitDirection){
         let splits = {
             horizontal: {
