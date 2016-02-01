@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Pane from './Pane';
-import styles from './Split.module.css';
 
 export default React.createClass({
     propTypes : {
