@@ -1,32 +1,30 @@
 import Rect from './rect.js';
+import {Record} from 'immutable';
 
-export class Node {
-  parent: Node;
-  constructor(parent: Node) {
-    this.parent = parent;
+function _getPath() {
+  let ret = [];
+  if (this.parent) {
+    if (this.parent.firstChild === this) {
+      ret.push(0);
+    } else if (this.parent.secondChild === this) {
+      ret.push(1);
+    } else {
+      throw new Error(`this intance is not contained in its parent:`, this);
+    }
+    return ret.concat(this.parent.getPath());
+  } else {
+    return ret;
   }
 }
 
-export class TreeNode extends Node {
-  firstChild: Node;
-  secondChild: Node;
-  splitType: Rect.SPLIT_TYPES;
-  splitRatio: number;
-  constructor({parent, firstChild, secondChild, splitType, splitRatio}: {parent: Node, firstChild: Node, secondChild: Node, splitType: Rect.SPLIT_TYPES, splitRatio: number}) {
-    super(parent);
-    this.firstChild = firstChild;
-    this.secondChild = secondChild;
-    this.splitType = splitType;
-    this.splitRatio = splitRatio;
-    Object.freeze(this);
+export class TreeNode extends Record({parent, firstChild, secondChild, splitType, splitRatio: 0.5}) {
+  getPath(...args) {
+    return _getPath.apply(this, args);
   }
 }
 
-export class DisplayNode extends Node {
-  uri: string;
-  constructor({parent, uri}: {parent: Node, uri: string}) {
-    super(parent);
-    this.uri = uri;
-    Object.freeze(this);
+export class DisplayNode extends Record({parent, uri: ''}) {
+  getPath(...args) {
+    return _getPath.apply(this, args);
   }
 }
