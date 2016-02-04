@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './Pane.module.css';
 
 export default React.createClass({
     getInitialState(){ return { src: 'http://google.com' } },

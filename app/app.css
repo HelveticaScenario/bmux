@@ -59,6 +59,7 @@ a:hover {
 .pane {
     display: inline-block;
     border: 3px solid pink;
+    width: 100%;
 }
 
 .top, .bottom {
