@@ -1,9 +1,5 @@
-import Node from './node.js';
+import { Record } from 'immutable';
 
-export default class Desktop {
-  root: Node;
-  constructor(root: Node) {
-    this.root = root;
-    Object.freeze(this);
-  }
+export default class Desktop extends Record({root}){
+
 }

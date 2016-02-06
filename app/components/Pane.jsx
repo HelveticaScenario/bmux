@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react'
+import Rect from '../structures/rect.js'
+import { DisplayNode } from '../structures/node.js'
+let {SPLIT_TYPES: {HORIZONTAL, VERTICAL}} = Rect
 
 export default React.createClass({
-    getInitialState(){ return { src: 'http://google.com' } },
-    getDefaultProps(){
-        return {
-            split: 'NONE',
-            src: 'NONE',
-            path: 'top'
-        }
+    getInitialState(){ return { uri: 'https://google.com' } },
+    contextTypes: {
+        actions: React.PropTypes.object
+    },
+    propTypes : {
+        node: PropTypes.instanceOf(DisplayNode), 
     },
     handleKeyPress: function(e) {
         if (e.key === 'Enter') {
@@ -15,15 +17,16 @@ export default React.createClass({
         }
     },
     render() {
-        let {className, setPane, splitPane, path, ...props} = this.props
+        let {node, path} = this.props
+        let { splitPane } = this.context.actions
         return (
-            <div className={className + ' pane'}>
+            <div className={'pane'}>
                 <div className="menu">
-                    <input value={this.state.src} onChange={e => this.setState({src: e.target.value})} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={_=>splitPane(path, 'horizontal')}>⬌</button>
-                    <button onClick={_=>splitPane(path, 'vertical')}>⬍</button>
+                    <input value={node.uri} onChange={e => this.setState({uri: e.target.value})} onKeyPress={this.handleKeyPress}/>
+                    <button onClick={_=>splitPane({path: path, splitType: HORIZONTAL})}><i className="fa fa-arrow-right"></i></button>
+                    <button onClick={_=>splitPane({path: path, splitType: VERTICAL})}><i className="fa fa-arrow-down"></i></button>
                 </div>
-                <webview {...props}/>
+                <webview src={this.state.uri}/>
             </div>
         );
     }

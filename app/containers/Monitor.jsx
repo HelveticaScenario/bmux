@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { splitPane } from '../actions/node'
 
-import Monitor from '../components/Monitor';
+import Monitor from '../components/Monitor'
 
 let MonitorActions = {
-    createSplit: (payload) => {
-        return {
-            type: 'CREATE_SPLIT',
-            payload
-        }
-    },
+    splitPane: splitPane,
     deleteSplit: (payload) => {
         return {
             type: 'DELETE_SPLIT',

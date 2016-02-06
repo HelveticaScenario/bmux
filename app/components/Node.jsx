@@ -2,39 +2,29 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Pane from './Pane';
 import Split from './Split';
+import {TreeNode, DisplayNode} from '../structures/node.js'
 
-export default React.createClass({
+export default Node = React.createClass({
     propTypes : {
-        split: PropTypes.string.isRequired,
-        left: PropTypes.object, right: PropTypes.object,
-        top: PropTypes.object, bottom: PropTypes.object,
+        node: PropTypes.oneOfType([
+            PropTypes.instanceOf(TreeNode), 
+            PropTypes.instanceOf(DisplayNode), 
+        ]),
     },
-    pane(pane){
-        let type = pane.type
-        pane.path = (type == 'root') ? type : pane.path + '.' + type 
-        if(pane.split == 'NONE' || !pane.split){
-            return (
-                <Pane key={type} className={type} {...pane} splitPane={this.props.splitPane} setPane={this.props.setPane}/>
-            )
-        } else {
-            return this.split(pane)
-        }
-    },
-    split(pane) {
-        let [firstType, secondType] = this.splitType(pane.split)
+    treeNode(path, node) {
         return (
-            <div className={`${pane.type} split ${pane.split}`}>
-                {this.pane({
-                    type: firstType, path: pane.path, ...pane[firstType]
-                })}
-                {this.pane({
-                    type: secondType, path: pane.path, ...pane[secondType]
-                })}
+            <div className={`${node.splitType.display} split`}>
+                <Node node={node.firstChild} path={path.concat([0])}/>
+                <Node node={node.secondChild} path={path.concat([1])}/>
             </div>
         );
     },
     render(){
-        let {splitPane, setPane, ...props} = this.props
-        return this.pane(props)
+        let {path, node} = this.props
+        if (node instanceof DisplayNode) {
+            return (<Pane {...this.props}/>);
+        } else if (node instanceof TreeNode) {
+            return this.treeNode(path, node);
+        }
     }
 });

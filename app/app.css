@@ -48,17 +48,24 @@ a:hover {
     width: 100%;
     height: 100%;
 }
-.split {
-    display: inline-block;
-    border: 3px solid red;
-}
-.pane {
+.root .pane {
     display: inline-block;
     border: 3px solid pink;
+}
+.root > .pane,
+.root > .split {
     width: 100%;
+    height: 100%;
 }
 
-.top, .bottom {
+.split.HORIZONTAL > .pane, 
+.split.HORIZONTAL > .split {
+    height: 100%;
+    width: 50%;
+}
+
+.split.VERTICAL > .pane,
+.split.VERTICAL > .split {
     height: 50%;
     width: 100%;
 }
